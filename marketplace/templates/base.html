@@ -1,0 +1,174 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}{% endblock %}</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+
+    <!-- Magnifier CSS (optional) -->
+    <link rel="stylesheet" href="https://unpkg.com/magnifier.js/dist/magnifier.min.css">
+
+    <!-- Font Awesome Official CDN -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.5.0/css/all.css">
+
+  <style>
+    body {
+      background-color: #f1f8fc;
+    }
+    .dash_sidebar {
+      height: 100vh;
+      background-color: #fff;
+      padding: 1rem;
+      border-right: 1px solid #ddd;
+    }
+    .dash_sidebar .advice {
+      background: #ffa726;
+      color: white;
+      padding: 10px;
+      border-radius: 5px;
+      margin-bottom: 1rem;
+    }
+    .dashboard {
+      padding: 2rem;
+    }
+    .card-ad {
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      background-color: #fff;
+      padding: 1rem;
+      margin-top: 1rem;
+    }
+    .ad-image {
+      width: 100px;
+      height: auto;
+    }
+    .top-ad-btn {
+      border: 1px solid #ffa726;
+      color: #ffa726;
+      background: transparent;
+      border-radius: 5px;
+      padding: 2px 8px;
+      font-size: 12px;
+    }
+
+    /* Hover dropdown on large screens */
+    @media (min-width: 992px) {
+      .navbar .dropdown:hover .dropdown-menu {
+        display: block;
+        margin-top: 0;
+      }
+    }
+    .green-header {
+      background-color: #0066cc;
+      padding: 20px 0;
+      color: white;
+    }
+    .search-bar {
+      margin-top: 10px;
+    }
+    .card img {
+      height: 200px;
+      object-fit: cover;
+    }
+    .sidebar {
+      max-height: 80vh;
+      overflow-y: auto;
+    }
+    form img.preview {
+      max-width: 100px;
+      max-height: 100px;
+      margin-top: 10px;
+    }
+
+  </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="{% url 'home' %}"><img src="{% static 'images/campusshop.png' %}" alt="logo" style="width: 100px;"></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
+                aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+  
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'login' %}">Login</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'register' %}">Register</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" href="#">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">About</a>
+            </li>
+  
+            <!-- Icon Dropdown -->
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="iconDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="fa-solid fa-user"></i>
+              </a>
+              <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="iconDropdown">
+                <li><a class="dropdown-item" href="{% url 'mystore' %}">My Store</a></li>
+                <li><a class="dropdown-item" href="#">Wallet</a></li>
+                <li><a class="dropdown-item" href="#">Settings</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item" href="#">Logout</a></li>
+              </ul>
+            </li>
+  
+            <!-- <li class="nav-item">
+              <button type="button" class="btn btn-warning"><a class="nav-link" href="#">Start Selling</a></button>
+            </li> -->
+            <li class="nav-item position-relative">
+                <a class="nav-link" href="#">
+                  <i class="fa-solid fa-bell"></i>
+                  <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                    3
+                    <span class="visually-hidden">unread messages</span>
+                  </span>
+                </a>
+              </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+  {% block content %}
+  {% endblock %}
+
+  <!-- jQuery -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+  <!-- Elevate Zoom (ezPlus) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/elevatezoom/3.0.8/jquery.elevatezoom.min.js"></script>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Your custom zoom logic -->
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      // Ensure the script is targeting the right images and initializing correctly
+      document.querySelectorAll('img[id^="zoom-image"]').forEach(img => {
+        $(img).elevateZoom({
+          zoomType: 'lens',
+          lensShape: 'round',
+          lensSize: 200
+        });
+      });
+    });
+  </script>
+
+</body>
+</html>

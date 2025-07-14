@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Campus Shop{% endblock %}
+{% block content %}
+      <!-- Main Dashboard -->
+    <div class="container mt-4">
+        <h2>Login</h2>
+        <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-success">Login</button>
+        </form>
+    </div>
+  
+  {% endblock %}

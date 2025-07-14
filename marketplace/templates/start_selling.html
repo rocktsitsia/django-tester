@@ -1,0 +1,76 @@
+{% extends 'dashboard_base.html' %}
+
+{% block title %}List Product{% endblock %}
+
+{% block content %}
+<form method="POST" enctype="multipart/form-data" class="p-4 bg-white shadow rounded">
+    {% csrf_token %}
+  
+    <h4 class="mb-4">Add a Product</h4>
+  
+    <!-- Product Title -->
+    <div class="mb-3">
+      <label for="title" class="form-label">Product Title</label>
+      <input type="text" class="form-control" id="title" name="title" placeholder="e.g., HP Laptop G3" required>
+    </div>
+  
+    <!-- Description -->
+    <div class="mb-3">
+      <label for="description" class="form-label">Description</label>
+      <textarea class="form-control" id="description" name="description" rows="4" placeholder="Write a clear description of the product..." required></textarea>
+    </div>
+  
+    <!-- Category -->
+    <div class="mb-3">
+      <label for="category" class="form-label">Category</label>
+      <select class="form-select" id="category" name="category" required>
+        <option value="" disabled selected>Select Category</option>
+        {% for category in categories %}
+          <option value="{{ category.id }}">{{ category }}</option>
+        {% endfor %}
+      </select>
+    </div>
+  
+    <!-- School -->
+    <div class="mb-3">
+      <label for="school" class="form-label">School</label>
+      <select class="form-select" id="school" name="school" required>
+        <option value="" disabled selected>Select School</option>
+        {% for school in schools %}
+          <option value="{{ school.id }}">{{ school.name }}</option>
+        {% endfor %}
+      </select>
+    </div>
+  
+    <!-- Price -->
+    <div class="mb-3">
+      <label for="price" class="form-label">Price (GHC)</label>
+      <input type="number" class="form-control" id="price" name="price" min="0" step="0.01" placeholder="e.g., 450.00" required>
+    </div>
+  
+    <!-- Phone Visibility -->
+    <div class="form-check mb-3">
+      <input class="form-check-input" type="checkbox" id="phone_visible" name="phone_visible" checked>
+      <label class="form-check-label" for="phone_visible">
+        Show my phone number on the listing
+      </label>
+    </div>
+  
+    <!-- Primary Image -->
+    <div class="mb-3">
+      <label for="image" class="form-label">Primary Image</label>
+      <input class="form-control" type="file" id="image" name="image" accept="image/*">
+    </div>
+  
+    <!-- Extra Images -->
+    <div class="mb-3">
+      <label for="extra_images" class="form-label">Additional Images</label>
+      <input class="form-control" type="file" id="extra_images" name="extra_images" accept="image/*" multiple>
+    </div>
+  
+    <!-- Submit Button -->
+    <button type="submit" class="btn btn-success w-100">Post Product</button>
+  </form>
+  
+{% endblock %}
+  

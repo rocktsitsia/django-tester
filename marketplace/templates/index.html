@@ -1,0 +1,97 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Campus Shop{% endblock %}
+{% block content %}
+
+<!-- Header -->
+<div class="green-header text-center py-4">
+    <div class="container">
+      <h3 class="mb-4">What are you looking for?</h3>
+      
+      <form method="get" class="row justify-content-center gx-2 gy-2">
+        <div class="col-12 col-md-6">
+          <input type="text" name="q" class="form-control form-control-lg" placeholder="I am looking for..." value="{{ request.GET.q }}">
+        </div>
+        <div class="col-12 col-md-2">
+          <button type="submit" class="btn btn-primary btn-lg w-100">Search</button>
+        </div>
+      </form>
+    </div>
+  </div>
+  
+
+  <div class="container mt-4">
+    <div class="row">
+      <!-- Sidebar -->
+      <div class="col-md-3 sidebar">
+        <ul class="list-group">
+            {% for school in schools %}
+              <a href="?school={{ school.id }}" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                {{ school.name }}
+                <span class="badge bg-secondary">
+                    {% if school.logo %}   
+                        <img src="{{ school.logo.url }}" alt="{{ school.name }}" style="width: 30px; height: 30px;" />
+                    {% else %}
+                        <img src="{% static 'images/default-logo.jpg' %}" alt="No Logo" style="width: 30px; height: 30px;" />
+                    {% endif %}
+                </span>
+              </a>
+            {% endfor %}
+          <!-- Add more as needed -->
+        </ul>
+      </div>
+  
+      <!-- Ads Section -->
+      <div class="col-md-9">
+        <h4>Start Buying</h4>
+  
+        <!-- Display Category Name -->
+        <div class="container px-0">
+            <div class="row g-2 mb-3">
+              {% for category in categories %}
+                <div class="col-6 col-sm-4 col-md-3 col-lg-2">
+                  <a href="?category={{ category.id }}" class="text-decoration-none">
+                    <div class="card text-center h-100 shadow-sm category-card">
+                      <div class="card-body p-2 btn-primary">
+                        <h6 class="card-title mb-0">{{ category.name }}</h6>
+                      </div>
+                    </div>
+                  </a>
+                </div>
+              {% empty %}
+                <div class="col-12">
+                  <div class="alert alert-info">No categories found.</div>
+                </div>
+              {% endfor %}
+            </div>
+          </div>
+          
+      
+        <div class="row row-cols-1 row-cols-md-3 g-4">
+          {% for product in products %}
+          <div class="col">
+            <div class="card h-100">
+              {% if product.image %}
+                <a href="{% url 'product_detail' product.pk %}" class="nav-link">
+                  <img src="{{ product.image.url }}" class="card-img-top" alt="{{ product.title }}">
+              {% else %}
+                  <img src="/static/images/default-pro-img.png" alt="No image available">
+              {% endif %}
+              <!-- <img src="{{ product.image.url }}" class="card-img-top" alt="{{ product.title }}"> -->
+              <div class="card-body">
+                <h5 class="text-success fw-bold">GH₵ {{ product.price }}</h5>
+                <h6 class="card-title">{{ product.title }}</h6>
+                <p class="card-text">{{ product.description|truncatechars:80 }}</p>
+              </div>
+              <div class="card-footer">
+                <span class="badge bg-secondary"><img src="{{ product.school.logo.url }}" alt="{{ product.school.name }}" style="width: 30px; height: 30px;" /></span><small class="text-muted">{{ product.school.name }}</small>
+              </div>
+            </a>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endblock %}

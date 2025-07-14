@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+{% block title %}Single{% endblock %}
+{% block content %}
+<div class="container mt-4">
+  <div class="row">
+    <!-- Product Image & Info -->
+    <div class="col-md-8">
+      <div class="card">
+        <div id="productCarousel" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner">
+                {% for image in product.images.all %}
+                  <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                    <img id="zoom-image-{{ forloop.counter }}"
+                        src="{{ image.image.url }}"
+                        data-zoom-image="{{ image.image.url }}"
+                        class="d-block w-100" style="height: 400px;" />
+                  </div>
+                {% endfor %}
+              </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#productCarousel" data-bs-slide="prev">
+              <span class="carousel-control-prev-icon"></span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#productCarousel" data-bs-slide="next">
+              <span class="carousel-control-next-icon"></span>
+            </button>
+          </div>
+
+        <div class="card-body">
+          <h3 class="fw-bold">{{ product.title }}</h3>
+          <p class="text-muted">{{ product.location }} • {{ product.posted_on|timesince }} ago • {{ product.views }} views</p>
+          <hr>
+          <h4 class="text-success">GH₵ {{ product.price }}</h4>
+          <p><strong>Condition:</strong> {{ product.condition }}</p>
+          <p><strong>Type:</strong> {{ product.category.name }}</p>
+          <p>{{ product.description }}</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Contact and Seller Info -->
+    <div class="col-md-4">
+      <div class="card p-3">
+        <h4 class="text-success">GH₵ {{ product.price }}</h4>
+        <button class="btn btn-outline-success mb-2">Request call back</button>
+        <hr>
+        <h5>{{ product.seller.store_name }}</h5>
+        <p><small>{{ product.seller.location }} • {{ product.seller.created_at|timesince }} on platform</small></p>
+        <button class="btn btn-primary w-100">Show Contact</button>
+        <button class="btn btn-outline-primary w-100 mt-2">Start Chat</button>
+
+        <div class="mt-3">
+          <strong>Feedback:</strong>
+          <p>{{ product.seller.feedback.count }} reviews</p>
+        </div>
+        <div class="mt-3">
+          <button class="btn btn-outline-danger w-100">Report Abuse</button>
+        </div>
+      </div>
+
+      <!-- Safety Tips -->
+      <div class="card mt-3 p-3 bg-light">
+        <h6 class="fw-bold">Safety tips</h6>
+        <ul class="small">
+          <li>Avoid paying in advance, even for delivery</li>
+          <li>Meet at a safe public place</li>
+          <li>Inspect the item before buying</li>
+          <li>Ensure it’s the item you ordered</li>
+          <li>Only pay if you're satisfied</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,36 @@
+{% extends 'dashboard_base.html' %}
+
+{% block title %}List Product{% endblock %}
+
+{% block content %}
+
+      <!-- Main Dashboard -->
+      <div class="col-md-9 dashboard">
+        <h4>My Store</h4>
+        <span class="badge bg-success">1 Active</span>
+
+        <div class="card-ad">
+          <div class="d-flex justify-content-between">
+            <div>
+              <strong>GHC 4,000</strong>
+              <p>New Laptop HP EliteBook 840 G3 16GB Intel Core I7 HDD+SSD 4T</p>
+              <small class="text-success">Active</small>
+              <p class="text-muted small">renewed 09/04</p>
+            </div>
+            <img src="https://via.placeholder.com/100" class="ad-image" alt="Laptop">
+          </div>
+          <div class="d-flex justify-content-between align-items-center mt-2">
+            <div class="text-muted small">
+              68 impressions | 15 visitors | 0 phone views | 0 chats
+            </div>
+            <div>
+              <button class="btn btn-sm btn-outline-secondary">Edit</button>
+              <button class="btn btn-sm btn-outline-danger">Close</button>
+              <button class="top-ad-btn">Top Ad</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endblock %}
