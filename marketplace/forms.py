@@ -8,4 +8,4 @@ class RegisterForm(UserCreationForm):
         fields = ['username', 'email', 'phone', 'student_id', 'ghana_card_number', 'school', 'profile_image', 'password1', 'password2']
 
 class LoginForm(AuthenticationForm):
-    username = forms.CharField(label='Username or Phone')
+    username = forms.CharField(label='Username or Phone')    
